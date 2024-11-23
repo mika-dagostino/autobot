@@ -41,6 +41,7 @@
 	display: flex;
 	flex-direction: column;
 	gap: 1.5rem;
+	margin-bottom: 20px;
 }
 
 .inputGroup {
@@ -73,7 +74,7 @@
 
 .input:focus ~ .label,
 .input:not(:placeholder-shown) ~ .label {
-	top: -20px;
+	top: -10px;
 	font-size: 0.875rem;
 	color: #667eea;
 }
@@ -93,19 +94,23 @@
 	background-color: #5a67d8;
 }
 
-.forgotPassword {
+.aTag {
 	text-align: center;
-	margin-top: 1rem;
-}
-
-.forgotPassword a {
 	color: #667eea;
 	text-decoration: none;
 	font-size: 0.875rem;
 }
 
-.forgotPassword a:hover {
+.aTag:hover {
 	text-decoration: underline;
+}
+
+.visibilityIcon {
+	position: absolute;
+	right: 0;
+	top: 50%;
+	transform: translateY(-50%);
+	cursor: pointer;
 }
 
 @media (max-width: 480px) {
