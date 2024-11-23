@@ -16,13 +16,12 @@ function Onboarding() {
 					</Link>
 				</div>
 				<div className={styles.imageContainer}>
-					<img
-						src="https://burgerkingks.com/wp-content/uploads/2020/08/Double-Whopper-meal.png"
-						alt="AI Dealership Assistant"
-						className={styles.image}
-					/>
+					<img src="/image.jpeg" alt="AI Dealership Assistant" className={styles.image} />
 				</div>
 			</main>
+			<div className={styles.chillGuy}>
+				<img src="/chillguy.png" alt="Chill Guy" className={styles.chillGuyImage} />
+			</div>
 		</div>
 	);
 }

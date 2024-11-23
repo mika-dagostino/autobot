@@ -86,7 +86,7 @@ export default function HomePage() {
 			/>
 			<header className={styles.header}>
 				<div className={styles.headerContent}>
-					<h1 className={styles.logo}>The Whoppers</h1>
+					<h1 className={styles.logo}>AutoBot</h1>
 					<nav className={styles.nav}>
 						<button onClick={() => setIsOpen(true)} className={styles.authButton}>
 							Logout
@@ -98,9 +98,12 @@ export default function HomePage() {
 				</div>
 			</header>
 			<main className={styles.main}>
+				<div className={styles.chillGuy}>
+					<img src="/chillguy.png" alt="Chill Guy" className={styles.chillGuyImage} />
+				</div>
 				<div className={styles.chatContainer}>
 					{messages.map((message, index) => (
-						<div key={index} className={`${styles.message} ${message.role === 'user' ? styles.userMessage : styles.assistantMessage}`}>
+						<div className={`${styles.message} ${message.role === 'user' ? styles.userMessage : styles.assistantMessage}`}>
 							{message.role === 'assistant' && index === messages.length - 1 ? displayedText : message.content}
 						</div>
 					))}

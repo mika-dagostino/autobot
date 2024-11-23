@@ -5,7 +5,7 @@ import Link from 'next/link';
 const Navbar = () => {
 	return (
 		<nav className={styles.navbar}>
-			<div className={styles.logo}>The Whoppers</div>
+			<div className={styles.logo}>AutoBot</div>
 			<div className={styles.buttons}>
 				<Link href="/login" className={styles.loginButton}>
 					Login

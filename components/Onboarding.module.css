@@ -24,6 +24,7 @@
 
 .description {
 	font-size: 1.2rem;
+	max-width: 80%;
 	color: #666;
 	margin-bottom: 2rem;
 }
@@ -47,4 +48,15 @@
 .image {
 	width: 100%;
 	height: auto;
+}
+
+.chillGuy {
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	transform: rotate(10deg) translate(50px, 50%);
+}
+
+.chillGuyImage {
+	width: 150px;
 }

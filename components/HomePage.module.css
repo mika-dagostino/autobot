@@ -4,12 +4,14 @@
 	height: 100vh;
 	background-color: #f0f4f8;
 	font-family: 'Roboto', sans-serif;
+	position: relative;
 }
 
 .header {
 	background-color: #ffffff;
 	padding: 1rem 2rem;
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	z-index: 999;
 }
 
 .headerContent {
@@ -81,6 +83,7 @@
 	flex-direction: column;
 	padding: 2rem;
 	overflow: hidden;
+	position: relative;
 }
 
 .chatContainer {
@@ -105,6 +108,7 @@
 	font-size: 1rem;
 	line-height: 1.5;
 	animation: fadeIn 0.3s ease-out;
+	position: relative;
 }
 
 .userMessage {
@@ -202,6 +206,17 @@
 
 .typingIndicator span:nth-child(3) {
 	animation-delay: 0.3s;
+}
+
+.chillGuy {
+	position: fixed;
+	top: 0;
+	left: 0;
+	transform: rotate(-180deg) translate(20px, -10px);
+}
+
+.chillGuyImage {
+	width: 150px;
 }
 
 @keyframes typing {
