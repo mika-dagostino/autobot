@@ -44,6 +44,15 @@ export default function HomePage() {
 			},
 		});
 
+		if (data.status === 'fail') {
+			clearInterval(timer);
+			setThinkingTime(0);
+			setMessages(snapshot => {
+				return [...snapshot, { role: 'assistant', content: data.message }];
+			});
+			return;
+		}
+
 		const content = data?.response || 'Sorry, we are having technical difficulties, please try to login again later';
 
 		clearInterval(timer);
@@ -53,8 +62,6 @@ export default function HomePage() {
 			return [...snapshot, { role: 'assistant', content }];
 		});
 	};
-
-	console.log(thinkingTime);
 
 	useEffect(() => {
 		messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
