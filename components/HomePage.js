@@ -11,15 +11,13 @@ import useFetch from '@/hooks/useFetch';
 export default function HomePage() {
 	const [messages, setMessages] = useState([]);
 	const [input, setInput] = useState('');
-	const [isLoading, setIsLoading] = useState(false);
 	const messagesEndRef = useRef(null);
 	const [thinkingTime, setThinkingTime] = useState(0);
 	const [isOpen, setIsOpen] = useState(false);
 	const router = useRouter();
 	const { fetchData: logoutFetchData, isLoading: logoutIsLoading } = useFetch();
+	const { fetchData, isLoading } = useFetch();
 
-	const dummyResponse =
-		'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolorum ullam quibusdam iusto qui quo culpa recusandae! Obcaecati quod eligendi eaque amet cupiditate vero nihil odio, voluptates accusantium, porro ipsam mollitia?';
 	const { displayedText, isTyping } = useTypingAnimation(
 		messages[messages.length - 1]?.role === 'assistant' ? messages[messages.length - 1].content : ''
 	);
@@ -32,23 +30,28 @@ export default function HomePage() {
 		const newMessages = [...messages, { role: 'user', content: input }];
 		setMessages(newMessages);
 		setInput('');
-		setIsLoading(true);
 
 		const timer = setInterval(() => {
 			setThinkingTime(prev => prev + 1);
 		}, 1000);
 
 		// Simulating API call to backend
-		await new Promise(resolve => setTimeout(resolve, 5000));
-		// TODO: Replace with actual API call to backend
+		const data = await fetchData('/api/chat', {
+			method: 'POST',
+			body: JSON.stringify({ prompt: input }),
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		});
+
+		const content = data?.response || 'Sorry, we are having technical difficulties, please try to login again later';
 
 		clearInterval(timer);
 		setThinkingTime(0);
 
 		setMessages(snapshot => {
-			return [...snapshot, { role: 'assistant', content: dummyResponse }];
+			return [...snapshot, { role: 'assistant', content }];
 		});
-		setIsLoading(false);
 	};
 
 	console.log(thinkingTime);
