@@ -12,6 +12,7 @@ export default function HomePage() {
 	const [isLoading, setIsLoading] = useState(false);
 	const messagesEndRef = useRef(null);
 	const [thinkingTime, setThinkingTime] = useState(0);
+	const [isOpen, setIsOpen] = useState(false);
 
 	const dummyResponse =
 		'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolorum ullam quibusdam iusto qui quo culpa recusandae! Obcaecati quod eligendi eaque amet cupiditate vero nihil odio, voluptates accusantium, porro ipsam mollitia?';
@@ -52,17 +53,34 @@ export default function HomePage() {
 		messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
 	}, [messages]);
 
+	const handlePrimaryAction = () => {
+		console.log('Primary action clicked');
+	};
+
+	const handleSecondaryAction = () => {
+		console.log('Secondary action clicked');
+	};
+
 	return (
 		<div className={styles.container}>
-			<ModalPopup isOpen={true} onClose={() => {}} title="Modal Title">
-				<p>Modal Content</p>
-			</ModalPopup>
+			<ModalPopup
+				isOpen={isOpen}
+				setIsOpen={setIsOpen}
+				title="Logout"
+				description="Are you sure you want to logout?"
+				primaryButtonText="Logout"
+				secondaryButtonText="Cancel"
+				onPrimaryAction={handlePrimaryAction}
+				onSecondaryAction={handleSecondaryAction}
+			/>
 			<header className={styles.header}>
 				<div className={styles.headerContent}>
 					<h1 className={styles.logo}>The Whoppers</h1>
 					<nav className={styles.nav}>
-						<button className={styles.authButton}>Logout</button>
-						<button className={styles.menuButton}>
+						<button onClick={() => setIsOpen(true)} className={styles.authButton}>
+							Logout
+						</button>
+						<button onClick={() => setIsOpen(true)} className={styles.menuButton}>
 							<LogoutIcon className={styles.menuIcon} />
 						</button>
 					</nav>
