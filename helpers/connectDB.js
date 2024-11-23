@@ -2,16 +2,16 @@ import { connect } from 'mongoose';
 
 const uri = process.env.MONGODB_URI;
 
-let cached = null;
+let cached = {};
 
 export async function connectToDatabase() {
 	try {
-		if (cached.conn) {
+		if (cached?.conn) {
 			console.log('Using existing connection ...');
-			return cached.conn;
+			return cached?.conn;
 		}
 
-		if (!cached.promise) {
+		if (!cached?.promise) {
 			const opts = {
 				bufferCommands: false,
 			};
@@ -26,7 +26,7 @@ export async function connectToDatabase() {
 				});
 		}
 		try {
-			cached.conn = await cached.promise;
+			cached.conn = await cached?.promise;
 		} catch (e) {
 			cached.promise = null;
 			throw e;

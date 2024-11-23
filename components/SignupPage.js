@@ -4,6 +4,7 @@ import Link from 'next/link';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import useFetch from '../hooks/useFetch';
+import { useRouter } from 'next/router';
 
 export default function SignUpPage() {
 	const [name, setName] = useState('');
@@ -13,17 +14,22 @@ export default function SignUpPage() {
 	const [confirmPassword, setConfirmPassword] = useState('');
 	const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] = useState(false);
 	const { fetchData, error, isLoading } = useFetch();
+	const router = useRouter();
 
 	async function handleSubmit(e) {
 		e.preventDefault();
 		const body = JSON.stringify({ name, email, password, confirmPassword });
-		await fetchData('/api/signup', {
+		const data = await fetchData('/api/signup', {
 			method: 'POST',
 			body,
 			headers: {
 				'Content-Type': 'application/json',
 			},
 		});
+
+		if (data.status === 'success') {
+			router.replace('/');
+		}
 	}
 
 	return (

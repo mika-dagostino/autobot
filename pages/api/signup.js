@@ -1,6 +1,6 @@
 import { connectToDatabase } from '@/helpers/connectDB';
 import tryCatch from '@/helpers/tryCatch';
-import { validateEmail, sanitize } from '@/helpers/validator';
+import { validateEmail, sanitizeEmail, sanitize } from '@/helpers/validator';
 import User from '@/models/userModel';
 import { hashPassword } from '@/helpers/crypt';
 import { createCookie } from '@/helpers/jwt';
@@ -37,7 +37,7 @@ async function signup(req, res) {
 
 	const name = sanitize(enteredName.trim());
 	const email = sanitizeEmail(enteredEmail.toLowerCase());
-	const password = hashPassword(enteredPassword.trim());
+	const password = await hashPassword(enteredPassword.trim());
 
 	await connectToDatabase();
 
@@ -57,7 +57,7 @@ async function signup(req, res) {
 
 	await User.create(user);
 
-	createCookie({ userIdentifier: userFound.userIdentifier }, res);
+	createCookie({ userIdentifier: user.userIdentifier }, res);
 
 	res.status(200).json({ status: 'success', message: 'Signup successful' });
 }
