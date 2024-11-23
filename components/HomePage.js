@@ -5,6 +5,7 @@ import UploadIcon from '@mui/icons-material/Upload';
 import LoadingDots from './LoadingDots';
 import LogoutIcon from '@mui/icons-material/Logout';
 import ModalPopup from './ModalPopup';
+import { useRouter } from 'next/router';
 
 export default function HomePage() {
 	const [messages, setMessages] = useState([]);
@@ -13,6 +14,7 @@ export default function HomePage() {
 	const messagesEndRef = useRef(null);
 	const [thinkingTime, setThinkingTime] = useState(0);
 	const [isOpen, setIsOpen] = useState(false);
+	const router = useRouter();
 
 	const dummyResponse =
 		'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolorum ullam quibusdam iusto qui quo culpa recusandae! Obcaecati quod eligendi eaque amet cupiditate vero nihil odio, voluptates accusantium, porro ipsam mollitia?';
@@ -54,11 +56,7 @@ export default function HomePage() {
 	}, [messages]);
 
 	const handlePrimaryAction = () => {
-		console.log('Primary action clicked');
-	};
-
-	const handleSecondaryAction = () => {
-		console.log('Secondary action clicked');
+		router.replace('/login');
 	};
 
 	return (
@@ -71,7 +69,6 @@ export default function HomePage() {
 				primaryButtonText="Logout"
 				secondaryButtonText="Cancel"
 				onPrimaryAction={handlePrimaryAction}
-				onSecondaryAction={handleSecondaryAction}
 			/>
 			<header className={styles.header}>
 				<div className={styles.headerContent}>

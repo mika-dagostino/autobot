@@ -9,7 +9,7 @@ export default function ModalPopup({
 	primaryButtonText,
 	secondaryButtonText,
 	onPrimaryAction,
-	onSecondaryAction,
+	onSecondaryAction = () => {},
 	isOpen,
 	setIsOpen,
 }) {
