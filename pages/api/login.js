@@ -14,7 +14,7 @@ async function handler(req, res) {
 async function login(req, res) {
 	const { email: enteredEmail, password: enteredPassword } = req.body;
 
-	if (!enteredEmail || !password) {
+	if (!enteredEmail || !enteredPassword) {
 		res.status(400).json({ status: 'fail', message: 'Email and password are required' });
 		return;
 	}

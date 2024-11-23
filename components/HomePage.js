@@ -6,6 +6,7 @@ import LoadingDots from './LoadingDots';
 import LogoutIcon from '@mui/icons-material/Logout';
 import ModalPopup from './ModalPopup';
 import { useRouter } from 'next/router';
+import useFetch from '@/hooks/useFetch';
 
 export default function HomePage() {
 	const [messages, setMessages] = useState([]);
@@ -15,6 +16,7 @@ export default function HomePage() {
 	const [thinkingTime, setThinkingTime] = useState(0);
 	const [isOpen, setIsOpen] = useState(false);
 	const router = useRouter();
+	const { fetchData: logoutFetchData, isLoading: logoutIsLoading } = useFetch();
 
 	const dummyResponse =
 		'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolorum ullam quibusdam iusto qui quo culpa recusandae! Obcaecati quod eligendi eaque amet cupiditate vero nihil odio, voluptates accusantium, porro ipsam mollitia?';
@@ -55,9 +57,10 @@ export default function HomePage() {
 		messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
 	}, [messages]);
 
-	const handlePrimaryAction = () => {
-		router.replace('/login');
-	};
+	async function logout() {
+		const data = await logoutFetchData('/api/logout');
+		if (data?.status === 'success') router.reload();
+	}
 
 	return (
 		<div className={styles.container}>
@@ -65,10 +68,11 @@ export default function HomePage() {
 				isOpen={isOpen}
 				setIsOpen={setIsOpen}
 				title="Logout"
+				disabled={logoutIsLoading}
 				description="Are you sure you want to logout?"
-				primaryButtonText="Logout"
+				primaryButtonText={logoutIsLoading ? 'Logging out...' : 'Logout'}
 				secondaryButtonText="Cancel"
-				onPrimaryAction={handlePrimaryAction}
+				onPrimaryAction={logout}
 			/>
 			<header className={styles.header}>
 				<div className={styles.headerContent}>

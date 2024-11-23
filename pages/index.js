@@ -1,7 +1,9 @@
 import HomePage from '@/components/HomePage';
+import Onboarding from '@/components/OnboardingPage';
+import { verifyJWT } from '@/helpers/jwt';
 import Head from 'next/head';
 
-export default function Home() {
+export default function Home({ isUserLoggedIn }) {
 	return (
 		<>
 			<Head>
@@ -11,10 +13,25 @@ export default function Home() {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<div>
-				<main>
-					<HomePage />
-				</main>
+				<main>{isUserLoggedIn ? <HomePage /> : <Onboarding />}</main>
 			</div>
 		</>
 	);
+}
+
+export async function getServerSideProps(context) {
+	let isUserLoggedIn = false;
+
+	try {
+		const user = await verifyJWT(context.req);
+		isUserLoggedIn = user ? true : false;
+	} catch (error) {
+		isUserLoggedIn = false;
+	}
+
+	return {
+		props: {
+			isUserLoggedIn,
+		},
+	};
 }

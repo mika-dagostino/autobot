@@ -12,6 +12,7 @@ export default function ModalPopup({
 	onSecondaryAction = () => {},
 	isOpen,
 	setIsOpen,
+	disabled = false,
 }) {
 	const dialogRef = useRef(null);
 
@@ -37,10 +38,10 @@ export default function ModalPopup({
 		}
 	}, [isOpen]);
 
-	const handlePrimaryAction = () => {
-		onPrimaryAction();
+	async function handlePrimaryAction() {
+		await onPrimaryAction();
 		setIsOpen(false);
-	};
+	}
 
 	const handleSecondaryAction = () => {
 		onSecondaryAction();
@@ -63,10 +64,10 @@ export default function ModalPopup({
 						</h2>
 						<p className={styles.description}>{description}</p>
 						<div className={styles.buttonContainer}>
-							<button onClick={handleSecondaryAction} className={`${styles.button} ${styles.secondaryButton}`}>
+							<button disabled={disabled} onClick={handleSecondaryAction} className={`${styles.button} ${styles.secondaryButton}`}>
 								{secondaryButtonText}
 							</button>
-							<button onClick={handlePrimaryAction} className={`${styles.button} ${styles.primaryButton}`}>
+							<button disabled={disabled} onClick={handlePrimaryAction} className={`${styles.button} ${styles.primaryButton}`}>
 								{primaryButtonText}
 							</button>
 						</div>
