@@ -113,6 +113,11 @@
 	cursor: pointer;
 }
 
+.errorMessage {
+	color: #e53e3e;
+	font-size: 0.875rem;
+}
+
 @media (max-width: 480px) {
 	.formContainer {
 		padding: 20px;

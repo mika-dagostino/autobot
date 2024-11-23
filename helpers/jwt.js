@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 import { promisify } from 'util';
 import User from '../models/userModel';
 import { connectToDatabase } from './connectDB';
-import { validateUUID } from './uuidHandler';
+import { validateUUID } from './uuid';
 
 const secretKey = process.env.JWT_SECRETKEY;
 

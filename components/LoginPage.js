@@ -3,17 +3,25 @@ import styles from './Auth.module.css';
 import Link from 'next/link';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import useFetch from '@/hooks/useFetch';
 
 export default function LoginPage() {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+	const { fetchData, error, isLoading } = useFetch();
 
-	const handleSubmit = e => {
+	async function handleSubmit(e) {
 		e.preventDefault();
-		// Here you would typically handle the login logic
-		console.log('Login attempted with:', { email, password });
-	};
+		const body = JSON.stringify({ email, password });
+		await fetchData('/api/login', {
+			method: 'POST',
+			body,
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		});
+	}
 
 	return (
 		<div className={styles.container}>
@@ -21,15 +29,7 @@ export default function LoginPage() {
 				<h1 className={styles.title}>Welcome Back</h1>
 				<form onSubmit={handleSubmit} className={styles.form}>
 					<div className={styles.inputGroup}>
-						<input
-							type="email"
-							id="email"
-							value={email}
-							onChange={e => setEmail(e.target.value)}
-							required
-							className={styles.input}
-							placeholder=" "
-						/>
+						<input type="email" id="email" value={email} onChange={e => setEmail(e.target.value)} className={styles.input} placeholder=" " />
 						<label htmlFor="email" className={styles.label}>
 							Email
 						</label>
@@ -40,7 +40,6 @@ export default function LoginPage() {
 							id="password"
 							value={password}
 							onChange={e => setPassword(e.target.value)}
-							required
 							className={styles.input}
 							placeholder=" "
 						/>
@@ -54,8 +53,9 @@ export default function LoginPage() {
 							<VisibilityIcon className={styles.visibilityIcon} onClick={() => setIsPasswordVisible(true)} />
 						)}
 					</div>
-					<button type="submit" className={styles.button}>
-						Log In
+					{error.isError && <p className={styles.errorMessage}>{error.message}</p>}
+					<button disabled={isLoading} type="submit" className={styles.button}>
+						{isLoading ? 'Loading ...' : 'Log In'}
 					</button>
 				</form>
 				<Link className={styles.aTag} href="/signup">
