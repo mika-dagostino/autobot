@@ -1,6 +1,6 @@
 import { connectToDatabase } from '@/helpers/connectDB';
 import tryCatch from '@/helpers/tryCatch';
-import { validateEmail, sanitize } from '@/helpers/validator';
+import { validateEmail, sanitizeEmail } from '@/helpers/validator';
 import User from '@/models/userModel';
 import { verifyPassword } from '@/helpers/crypt';
 import { createCookie } from '@/helpers/jwt';
@@ -15,10 +15,11 @@ async function login(req, res) {
 	const { email: enteredEmail, password: enteredPassword } = req.body;
 
 	if (!enteredEmail || !password) {
-		return res.status(400).json({ status: 'fail', message: 'Email and password are required' });
+		res.status(400).json({ status: 'fail', message: 'Email and password are required' });
+		return;
 	}
 
-	const email = sanitize(enteredEmail.toLowerCase());
+	const email = sanitizeEmail(enteredEmail.toLowerCase());
 	const password = enteredPassword.trim();
 
 	if (password.length < 8 || !validateEmail(email)) {
@@ -31,7 +32,8 @@ async function login(req, res) {
 	const userFound = await User.findOne({ email });
 
 	if (!userFound) {
-		return res.status(401).json({ status: 'fail', message: 'Invalid email or password' });
+		res.status(401).json({ status: 'fail', message: 'Invalid email or password' });
+		return;
 	}
 
 	const isValidPassword = await verifyPassword(password, userFound.password);

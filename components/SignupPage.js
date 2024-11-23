@@ -3,6 +3,7 @@ import styles from './Auth.module.css';
 import Link from 'next/link';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import useFetch from '../hooks/useFetch';
 
 export default function SignUpPage() {
 	const [name, setName] = useState('');
@@ -11,16 +12,19 @@ export default function SignUpPage() {
 	const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 	const [confirmPassword, setConfirmPassword] = useState('');
 	const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] = useState(false);
+	const { fetchData, error, isLoading } = useFetch();
 
-	const handleSubmit = e => {
+	async function handleSubmit(e) {
 		e.preventDefault();
-		if (password !== confirmPassword) {
-			alert('Passwords do not match');
-			return;
-		}
-		// Here you would typically handle the signup logic
-		console.log('SignUp attempted with:', { name, email, password });
-	};
+		const body = JSON.stringify({ name, email, password, confirmPassword });
+		await fetchData('/api/signup', {
+			method: 'POST',
+			body,
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		});
+	}
 
 	return (
 		<div className={styles.container}>
@@ -28,29 +32,13 @@ export default function SignUpPage() {
 				<h1 className={styles.title}>Create an Account</h1>
 				<form onSubmit={handleSubmit} className={styles.form}>
 					<div className={styles.inputGroup}>
-						<input
-							type="text"
-							id="name"
-							value={name}
-							onChange={e => setName(e.target.value)}
-							required
-							className={styles.input}
-							placeholder=" "
-						/>
+						<input type="text" id="name" value={name} onChange={e => setName(e.target.value)} className={styles.input} placeholder=" " />
 						<label htmlFor="name" className={styles.label}>
 							Name
 						</label>
 					</div>
 					<div className={styles.inputGroup}>
-						<input
-							type="email"
-							id="email"
-							value={email}
-							onChange={e => setEmail(e.target.value)}
-							required
-							className={styles.input}
-							placeholder=" "
-						/>
+						<input type="email" id="email" value={email} onChange={e => setEmail(e.target.value)} className={styles.input} placeholder=" " />
 						<label htmlFor="email" className={styles.label}>
 							Email
 						</label>
@@ -61,7 +49,6 @@ export default function SignUpPage() {
 							id="password"
 							value={password}
 							onChange={e => setPassword(e.target.value)}
-							required
 							className={styles.input}
 							placeholder=" "
 						/>
@@ -81,7 +68,6 @@ export default function SignUpPage() {
 							id="confirmPassword"
 							value={confirmPassword}
 							onChange={e => setConfirmPassword(e.target.value)}
-							required
 							className={styles.input}
 							placeholder=" "
 						/>
@@ -95,8 +81,9 @@ export default function SignUpPage() {
 							<VisibilityIcon className={styles.visibilityIcon} onClick={() => setIsConfirmPasswordVisible(true)} />
 						)}
 					</div>
-					<button type="submit" className={styles.button}>
-						Sign Up
+					{error.isError && <p className={styles.errorMessage}>{error.message}</p>}
+					<button disabled={isLoading} type="submit" className={styles.button}>
+						{isLoading ? 'Loading ...' : 'Sign Up'}
 					</button>
 				</form>
 				<Link className={styles.aTag} href="/login">
