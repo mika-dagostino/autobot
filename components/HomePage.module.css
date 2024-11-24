@@ -24,7 +24,7 @@
 }
 
 .logo {
-	font-size: 2rem;
+	font-size: 2.5rem;
 	font-weight: 600;
 	color: var(--color-4);
 	font-family: 'TransformersMovie', serif;
@@ -154,7 +154,7 @@
 	font-size: 1rem;
 	border: none;
 	border-radius: 0.5rem;
-	background-color: var(--color-4);
+	background-color: var(--color-3);
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -172,8 +172,8 @@
 	border-radius: 50%;
 	font-size: 1rem;
 	font-weight: 600;
-	color: var(--color-4);
-	background-color: var(--color-1);
+	color: var(--color-1);
+	background-color: var(--color-2);
 	border: none;
 	cursor: pointer;
 	transition: background-color 0.2s ease;
