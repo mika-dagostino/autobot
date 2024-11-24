@@ -34,3 +34,8 @@ body {
 .overflow-y-auto {
 	scroll-behavior: smooth;
 }
+
+ul,
+ol {
+	margin-left: 20px;
+}

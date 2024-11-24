@@ -8,6 +8,7 @@ import ModalPopup from './ModalPopup';
 import { useRouter } from 'next/router';
 import useFetch from '@/hooks/useFetch';
 import RefreshIcon from '@mui/icons-material/Refresh';
+import MarkdownRenderer from './MarkDown';
 
 export default function HomePage() {
 	const [messages, setMessages] = useState([]);
@@ -123,7 +124,9 @@ export default function HomePage() {
 				<div className={styles.chatContainer}>
 					{messages.map((message, index) => (
 						<div className={`${styles.message} ${message.role === 'user' ? styles.userMessage : styles.assistantMessage}`}>
-							{message.role === 'assistant' && index === messages.length - 1 ? displayedText : message.content}
+							<MarkdownRenderer>
+								{message.role === 'assistant' && index === messages.length - 1 ? displayedText : message.content}
+							</MarkdownRenderer>
 						</div>
 					))}
 					{isLoading && (
