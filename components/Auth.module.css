@@ -31,7 +31,7 @@
 }
 
 .title {
-	color: #4a5568;
+	color: var(--color-0);
 	font-size: 2rem;
 	margin-bottom: 1.5rem;
 	text-align: center;
@@ -52,23 +52,24 @@
 	width: 100%;
 	padding: 10px 0px;
 	border: none;
-	border-bottom: 2px solid #cbd5e0;
+	border-bottom: 2px solid var(--color-2);
 	background-color: transparent;
 	outline: none;
 	transition: border-color 0.3s;
 	font-size: 1rem;
 	font-family: 'TransformersMovie', sans-serif;
+	letter-spacing: var(--letter-spacing);
 }
 
 .input:focus {
-	border-color: #667eea;
+	border-color: var(--color-1);
 }
 
 .label {
 	position: absolute;
 	left: 0;
 	top: 10px;
-	color: #a0aec0;
+	color: var(--color-2);
 	transition: all 0.3s;
 	pointer-events: none;
 }
@@ -77,11 +78,11 @@
 .input:not(:placeholder-shown) ~ .label {
 	top: -10px;
 	font-size: 0.875rem;
-	color: #667eea;
+	color: var(--color-1);
 }
 
 .button {
-	background-color: #667eea;
+	background-color: var(--color-1);
 	color: white;
 	padding: 10px;
 	border: none;
@@ -90,15 +91,16 @@
 	cursor: pointer;
 	transition: background-color 0.3s;
 	font-family: 'TransformersMovie', sans-serif;
+	letter-spacing: var(--letter-spacing);
 }
 
 .button:hover {
-	background-color: #5a67d8;
+	background-color: var(--color-2);
 }
 
 .aTag {
 	text-align: center;
-	color: #667eea;
+	color: var(--color-1);
 	text-decoration: none;
 	font-size: 0.875rem;
 }
@@ -116,7 +118,7 @@
 }
 
 .errorMessage {
-	color: #e53e3e;
+	color: red;
 	font-size: 0.875rem;
 }
 

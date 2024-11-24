@@ -2,9 +2,10 @@
 	display: flex;
 	flex-direction: column;
 	height: 100vh;
-	background-color: var(--color-0);
+	background: linear-gradient(135deg, var(--color-0) 20%, var(--color-1) 80%);
 	font-family: 'TransformersMovie', sans-serif;
 	position: relative;
+	letter-spacing: var(--letter-spacing);
 }
 
 .header {
@@ -27,6 +28,7 @@
 	font-weight: 600;
 	color: var(--color-4);
 	font-family: 'TransformersMovie', serif;
+	letter-spacing: var(--letter-spacing);
 }
 
 .nav {
@@ -45,6 +47,7 @@
 	cursor: pointer;
 	transition: all 0.2s ease;
 	font-family: 'TransformersMovie', sans-serif;
+	letter-spacing: var(--letter-spacing);
 }
 
 .authButton:hover {
@@ -145,6 +148,7 @@
 
 .input {
 	font-family: 'TransformersMovie', sans-serif;
+	letter-spacing: var(--letter-spacing);
 	flex-grow: 1;
 	padding: 1rem;
 	font-size: 1rem;

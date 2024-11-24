@@ -11,6 +11,8 @@
 	--color-2: #d5aaff;
 	--color-3: #aed2ff;
 	--color-4: #e4f1ff;
+
+	--letter-spacing: 2px;
 }
 
 * {
@@ -21,6 +23,7 @@
 
 body {
 	font-family: 'TransformersMovie', sans-serif;
+	letter-spacing: var(--letter-spacing);
 	background-color: var(--background-color);
 	color: var(--text-color);
 }

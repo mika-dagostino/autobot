@@ -3,13 +3,15 @@
 	justify-content: space-between;
 	align-items: center;
 	padding: 1rem 2rem;
-	background-color: #f8f9fa;
+	background-color: var(--color-1);
 }
 
 .logo {
-	font-size: 1.5rem;
-	font-weight: bold;
-	color: #333;
+	font-size: 2rem;
+	font-weight: 600;
+	color: var(--color-4);
+	font-family: 'TransformersMovie', serif;
+	letter-spacing: var(--letter-spacing);
 }
 
 .buttons {
@@ -19,21 +21,31 @@
 
 .loginButton,
 .signupButton {
-	padding: 0.5rem 1rem;
-	border: none;
-	border-radius: 4px;
-	cursor: pointer;
+	padding: 0.75rem 1.5rem;
 	font-size: 1rem;
+	font-weight: 500;
+	color: var(--color-3);
+	background-color: var(--color-1);
+	border: 1px solid var(--color-3);
+	border-radius: 0.25rem;
+	cursor: pointer;
+	transition: all 0.2s ease;
+	font-family: 'TransformersMovie', sans-serif;
+	letter-spacing: var(--letter-spacing);
 	text-decoration: none;
 }
 
-.loginButton {
-	background-color: #fff;
-	color: #007bff;
-	border: 1px solid #007bff;
+.signupButton {
+	background-color: var(--color-3);
+	color: var(--color-1);
 }
 
-.signupButton {
-	background-color: #007bff;
-	color: #fff;
+.loginButton:hover {
+	background-color: var(--color-2);
+	color: var(--color-1);
+}
+
+.signupButton:hover {
+	background-color: var(--color-2);
+	color: var(--color-4);
 }
