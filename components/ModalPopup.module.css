@@ -7,6 +7,7 @@
 	cursor: pointer;
 	font-size: 16px;
 	transition: background-color 0.3s ease;
+	font-family: 'TransformersMovie', sans-serif;
 }
 
 .triggerButton:hover {
@@ -16,6 +17,7 @@
 .overlay {
 	position: fixed;
 	top: 0;
+	z-index: 9999999;
 	left: 0;
 	right: 0;
 	bottom: 0;
@@ -53,6 +55,7 @@
 }
 
 .button {
+	font-family: 'TransformersMovie', sans-serif;
 	padding: 10px 20px;
 	border: none;
 	border-radius: 4px;

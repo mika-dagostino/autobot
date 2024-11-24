@@ -1,9 +1,16 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600&display=swap');
+@font-face {
+	font-family: 'TransformersMovie';
+	src: url('/Transformers-Movie.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
 
 :root {
-	--primary-color: #4299e1;
-	--background-color: #f0f4f8;
-	--text-color: #2d3748;
+	--color-0: #27005d;
+	--color-1: #9400ff;
+	--color-2: #d5aaff;
+	--color-3: #aed2ff;
+	--color-4: #e4f1ff;
 }
 
 * {
@@ -13,7 +20,7 @@
 }
 
 body {
-	font-family: 'Roboto', sans-serif;
+	font-family: 'TransformersMovie', sans-serif;
 	background-color: var(--background-color);
 	color: var(--text-color);
 }

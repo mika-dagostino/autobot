@@ -1,6 +1,8 @@
 import SignUpPage from '@/components/SignupPage';
 import Head from 'next/head';
 
+// TODO: Initialize the preference DB size
+
 export default function Login() {
 	return (
 		<>

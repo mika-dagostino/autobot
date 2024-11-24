@@ -2,6 +2,7 @@
 	min-height: 100vh;
 	display: flex;
 	flex-direction: column;
+	background: linear-gradient(135deg, var(--color-0) 20%, var(--color-1) 80%);
 }
 
 .main {

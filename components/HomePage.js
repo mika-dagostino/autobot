@@ -35,7 +35,7 @@ export default function HomePage() {
 			setThinkingTime(prev => prev + 1);
 		}, 1000);
 
-		// Simulating API call to backend
+		// TODO: Send the history of messages to the server
 		const data = await fetchData('/api/chat', {
 			method: 'POST',
 			body: JSON.stringify({ prompt: input }),
