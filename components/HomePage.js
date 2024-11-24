@@ -35,31 +35,39 @@ export default function HomePage() {
 			setThinkingTime(prev => prev + 1);
 		}, 1000);
 
-		const data = await fetchData('/api/chat', {
-			method: 'POST',
-			body: JSON.stringify({ prompt: input, chatHistory: newMessages }),
-			headers: {
-				'Content-Type': 'application/json',
-			},
-		});
+		try {
+			const data = await fetchData('/api/chat', {
+				method: 'POST',
+				body: JSON.stringify({ prompt: input, chatHistory: newMessages }),
+				headers: {
+					'Content-Type': 'application/json',
+				},
+			});
 
-		if (data.status === 'fail') {
+			if (data.status === 'fail') {
+				clearInterval(timer);
+				setThinkingTime(0);
+				setMessages(snapshot => {
+					return [...snapshot, { role: 'assistant', content: data.message }];
+				});
+				return;
+			}
+
+			const content = data?.response || 'Sorry, we are having technical difficulties, please try to login again later';
+
+			clearInterval(timer);
+			setThinkingTime(0);
+
+			setMessages(snapshot => {
+				return [...snapshot, { role: 'assistant', content }];
+			});
+		} catch (error) {
 			clearInterval(timer);
 			setThinkingTime(0);
 			setMessages(snapshot => {
-				return [...snapshot, { role: 'assistant', content: data.message }];
+				return [...snapshot, { role: 'assistant', content: 'Sorry, we are having technical difficulties, please try to login again later' }];
 			});
-			return;
 		}
-
-		const content = data?.response || 'Sorry, we are having technical difficulties, please try to login again later';
-
-		clearInterval(timer);
-		setThinkingTime(0);
-
-		setMessages(snapshot => {
-			return [...snapshot, { role: 'assistant', content }];
-		});
 	};
 
 	useEffect(() => {
