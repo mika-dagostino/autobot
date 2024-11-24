@@ -84,7 +84,7 @@ export default function HomePage() {
 	async function resetVector() {
 		const data = await refreshData('/api/reset-vector');
 		if (data?.status === 'success') {
-			setMessages([{ role: 'assistant', content: 'Your preference vector has been reset' }]);
+			setMessages([{ role: 'assistant', content: 'Your preferences have been changed' }]);
 		}
 	}
 
