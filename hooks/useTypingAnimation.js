@@ -9,9 +9,10 @@ export function useTypingAnimation(text, speed = 20) {
 
 		setIsTyping(true);
 		let i = -1;
+		const splitText = text.split(' ') || [];
 		const timer = setInterval(() => {
-			if (i < text.length) {
-				setDisplayedText(prev => prev + text.charAt(i));
+			if (i < splitText.length - 1) {
+				setDisplayedText(prev => prev + splitText[i] + ' ');
 				i++;
 			} else {
 				clearInterval(timer);
