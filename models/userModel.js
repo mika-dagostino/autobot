@@ -5,7 +5,7 @@ const defaultPreferenceVector = {
 	Make: [],
 	Model: [],
 	Body: [],
-	DOORS: [],
+	Doors: [],
 	ExteriorColor: [],
 	InteriorColor: [],
 	EngineCylinders: [],
