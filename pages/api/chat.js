@@ -29,7 +29,7 @@ async function chat(req, res) {
 	});
 
 	const data = await response.json();
-	const updatedPreferenceVector = data?.updatedPreferenceVector;
+	const updatedPreferenceVector = data?.preferenceVector;
 	const output = data?.response || 'Sorry, we are having technical difficulties, please try to login again later';
 
 	if (updatedPreferenceVector) {
