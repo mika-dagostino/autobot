@@ -35,10 +35,9 @@ export default function HomePage() {
 			setThinkingTime(prev => prev + 1);
 		}, 1000);
 
-		// TODO: Send the history of messages to the server
 		const data = await fetchData('/api/chat', {
 			method: 'POST',
-			body: JSON.stringify({ prompt: input }),
+			body: JSON.stringify({ prompt: input, chatHistory: newMessages }),
 			headers: {
 				'Content-Type': 'application/json',
 			},

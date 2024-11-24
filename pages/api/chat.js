@@ -9,7 +9,7 @@ async function handler(req, res) {
 }
 
 async function chat(req, res) {
-	const { prompt } = req.body;
+	const { prompt, chatHistory = [] } = req.body;
 
 	const user = await verifyJWT(req);
 
@@ -25,7 +25,7 @@ async function chat(req, res) {
 		headers: {
 			'Content-Type': 'application/json',
 		},
-		body: JSON.stringify({ prompt, preferenceVector }),
+		body: JSON.stringify({ prompt, preferenceVector, chatHistory }),
 	});
 
 	const data = await response.json();

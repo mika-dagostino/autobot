@@ -1,4 +1,4 @@
-import { Schema, models, model, deleteModel } from 'mongoose';
+import { Schema, models, model } from 'mongoose';
 
 const defaultPreferenceVector = {
 	Year: [],
