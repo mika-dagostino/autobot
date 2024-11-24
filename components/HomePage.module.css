@@ -65,7 +65,8 @@
 	border-color: var(--color-2);
 }
 
-.menuButton {
+.menuButton,
+.refreshBtn {
 	display: none;
 	font-size: 1rem;
 	font-weight: 500;
@@ -75,6 +76,10 @@
 	border-radius: 0.25rem;
 	cursor: pointer;
 	transition: all 0.2s ease;
+}
+
+.refreshBtn {
+	display: block;
 }
 
 .menuIcon {

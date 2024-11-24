@@ -7,6 +7,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import ModalPopup from './ModalPopup';
 import { useRouter } from 'next/router';
 import useFetch from '@/hooks/useFetch';
+import RefreshIcon from '@mui/icons-material/Refresh';
 
 export default function HomePage() {
 	const [messages, setMessages] = useState([]);
@@ -17,6 +18,7 @@ export default function HomePage() {
 	const router = useRouter();
 	const { fetchData: logoutFetchData, isLoading: logoutIsLoading } = useFetch();
 	const { fetchData, isLoading } = useFetch();
+	const { fetchData: refreshData } = useFetch();
 
 	const { displayedText, isTyping } = useTypingAnimation(
 		messages[messages.length - 1]?.role === 'assistant' ? messages[messages.length - 1].content : ''
@@ -79,6 +81,13 @@ export default function HomePage() {
 		if (data?.status === 'success') router.reload();
 	}
 
+	async function resetVector() {
+		const data = await refreshData('/api/reset-vector');
+		if (data?.status === 'success') {
+			setMessages([{ role: 'assistant', content: 'Your preference vector has been reset' }]);
+		}
+	}
+
 	return (
 		<div className={styles.container}>
 			<ModalPopup
@@ -95,6 +104,9 @@ export default function HomePage() {
 				<div className={styles.headerContent}>
 					<h1 className={styles.logo}>AutoBot</h1>
 					<nav className={styles.nav}>
+						<button onClick={resetVector} className={styles.refreshBtn}>
+							<RefreshIcon />
+						</button>
 						<button onClick={() => setIsOpen(true)} className={styles.authButton}>
 							Logout
 						</button>
