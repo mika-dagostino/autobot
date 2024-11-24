@@ -1,4 +1,24 @@
-import { Schema, models, model } from 'mongoose';
+import { Schema, models, model, deleteModel } from 'mongoose';
+
+const defaultPreferenceVector = {
+	Year: [],
+	Make: [],
+	Model: [],
+	Body: [],
+	DOORS: [],
+	ExteriorColor: [],
+	InteriorColor: [],
+	EngineCylinders: [],
+	Transmission: [],
+	Miles: [],
+	SellingPrice: [],
+	MarketClass: [],
+	PassengerCapacity: [],
+	Drivetrain: [],
+	Engine_Description: [],
+	CityMPG: [],
+	HighwayMPG: [],
+};
 
 const userSchema = new Schema({
 	userIdentifier: {
@@ -22,8 +42,9 @@ const userSchema = new Schema({
 	},
 
 	preferenceVector: {
-		type: [Array],
+		type: Object,
 		required: true,
+		default: defaultPreferenceVector,
 	},
 });
 
